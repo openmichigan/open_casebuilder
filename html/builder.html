@@ -1,0 +1,388 @@
+<!-- This page is part of Open Case Builder from University of Michigan, a free open source application available at http://openmi.ch/casebuilder. -->
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Open Case Builder: Create Case</title>
+
+<!-- Import custom stylesheets-->
+<link href="../css/builder.css" rel="stylesheet" type="text/css" />
+<link href="../css/add_box.css" rel="stylesheet" type="text/css" />
+<link href="../css/preview_box.css" rel="stylesheet" type="text/css" />
+
+<!-- Import stylesheet for jquery-->
+<link href="../css/jquery-ui-1.8.23.custom.css" rel="stylesheet" type="text/css" />
+
+<!-- Import javascript from jquery and ckeditor-->
+<script type="text/javascript" src="../js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="../js/jquery-ui-1.8.23.custom.min.js"></script>
+<script type="text/javascript" src="../ckeditor/ckeditor.js"></script>
+
+<!--Import custom javascript-->
+<script type="text/javascript" src="../js/builder.js"></script>
+<script type="text/javascript" src="../js/rearrange.js"></script>
+<script type="text/javascript" src="../js/fill_view.js"></script>
+<script type="text/javascript" src="../js/edit_by_section.js"></script>
+<script type="text/javascript" src="../js/view_answers.js"></script>
+
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div id="header">
+	<img id = "blue building blocks" width = "55px" src = "../images/blue_blocks.png" />
+	<span id = "title" >Open Case Builder</span>
+</div>
+<!-- ############### -->
+
+
+<!--NAVIGATION -->
+<span id = "navigation">
+	<ul id = "nav">
+		<a href = "../intro.html"><li>Introduction</li></a>
+		<a href = "./builder.html"><li>Create Case</li></a>
+		<a href = "./about.html"><li>About</li></a>
+	</ul>
+
+Create case elements using the tabs in the left pane. Click the Add button then watch the case develop in the Preview box. Before you exit this page, click Export to view the complete, stylized case in another tab: 
+<ol>
+<li>Click Export.</li>
+<li>In the new tab select File > Save Page As.</li>
+<li>Select Format = Webpage, Complete.</li>
+<li>Click the Save button. This will create a .html file and a corresponding folder with the same name (eg. case_one.html and a folder called case_one).</li>
+<li>In order to share your case with others, create a zip file that contains the .html file and the folder 
+(do not move the .html file within the case folder, it must be at the same level as the folder), 
+then distribute to others <a target="_blank" href="../refs/OpenMichigan-Share With the World.pdf">online</a> or via removeable media (e.g. USB drives).</li></ol>
+
+	
+</span>
+<!-- ############### -->
+
+
+<!--MAIN -->
+<span id = "main">
+	
+	
+	<table id = "title_table">
+    <tr>
+		
+
+		<td width="300px">
+			<input id = "case_name" type = "text" value = "Enter Case Title" style = "color: #BBB;"
+			onfocus="if(this.value==this.defaultValue){this.value='';}this.style.color='#000';" 
+			onblur="if(this.value==''){this.value=this.defaultValue;this.style.color='#BBB';}" /> 
+			<!-- Remove/Add default text -->
+        </td>    
+            <td width="200px"><p id = "preview_header">Preview</p></td>
+		
+
+	
+		<td><p id = "add_header">Add Elements<p></td>
+
+	</tr>
+	</table>
+
+
+
+	<table id = "content_table">
+	<tr>
+	<td>
+
+	<!-- PREVIEW CASE -->	
+	<div id = "preview">
+
+	</div>
+	</td>
+
+	<!-- ADD CASE BOX -->
+	<td>
+	<div id = "add">
+		<div id = "add_bar">
+			<div class = "tab" id = "lo">Learning Objectives</div>
+			<div class = "tab" id = "patient">Patient</div>
+			<div class = "tab" id = "text">Text or <br /> Links</div>
+			<div class = "tab" id = "question">Question</div>
+			<div class = "tab" id = "media">Media</div>
+			<div class = "tab" id = "author">Author</div>
+		</div>
+
+		</br></br>
+
+		<div id = "add_content">
+
+			<!-- ALL CONTENT FOR DIFFERENT ADD TABS -->
+
+			<!-- LEARNING OBJECTIVE -->
+			<span class = "tab_content" id = "lo_content">
+				<p id = 'tab_title'>Add Learning Objectives:</p>
+				
+				<!--<div id = "information">i</div>-->
+
+				<span class = "input_and_circle">
+					<input id = 'lo_1' class = 'lo_tab_input' value = 'Enter Learning Objective 1'/> 
+				</span>
+
+				
+				<span id = "controls">
+					</br></br>
+					<div id = 'add_input' class = 'circle'>+</div>
+					<div id = 'remove_input' class = 'circle'>-</div>
+				</span>
+			</span>
+			<!-- ############################################## -->
+
+
+			<!-- PATIENT -->
+			<span class = "tab_content" id = "pat_content">
+				<p id = "tab_title">Add Patient Profile:</p>
+				
+				<!--<div id = "information">i</div>-->
+				</br></br>
+				
+				<select class = "pat_drop" id = "gender" style = "width: 150px;">
+					<option id = "gender" value = "0">Gender</option>
+					<option id = "gender" value = "Male">Male</option>
+					<option id = "gender" value = "Female">Female</option>
+				</select>
+
+				</br></br>
+				<input class = "content_input" id = 'pat_age' value = 'Enter Age'/> 
+                <input class = "content_input" id = 'pat_country' value = 'Enter Region or Country'/>
+                <input class = "content_input" id = 'pat_other' value = 'Enter Other Details'/> 
+
+			</span>
+			<!-- ############################################## -->
+
+
+			<!-- TEXT -->
+			<span class = "tab_content" id = "text_content">
+				<p id = "tab_title">Add Text:</p>
+				<!--<div id = "information">i</div>-->
+				</br></br>
+				
+				<input id = 'text_header' class = 'content_input' value = 'Section Header'/> 
+				
+				</br></br>
+				
+				Add Section Border <input id = "add_border" type = "checkbox" />
+				
+				</br></br>
+
+				<textarea id = "editor" name = "editor"></textarea>
+
+			</span>
+			<!-- ############################################## -->
+
+
+			<!-- QUESTION -->
+			<span class = "tab_content" id = "q_content">
+				<p id = "tab_title">Add Question:</p>
+				<!--<div id = "information">i</div>-->
+				</br></br>
+				<select id = "question_type">
+					<option value = "mc">Multiple Choice</option>
+					<option value = "tf">True/False</option>
+					<option value = "fill">Fill in the Blank</option>
+				</select>
+
+				</br></br>
+
+				<input class = "content_input" id = 'q_input' value = 'Type Question'/> 
+				
+				</br></br>
+
+				<!-- MULTIPLE CHOICE -->
+				<span id = "mc_input">
+					<p id = 'sub_title'>Options:</p>
+
+					<div class = "mc_group">
+						<span id = "input_and_circle">
+							<input type = "text" class = "q_tab_answer" id = 'mc_1' value = 'Enter Option 1'/> 
+							
+							<span class = "correct_radio">Correct
+								<input  value = "1" class = "mc_radio" type = 'radio' name = 'mc_correct' id = 'mc_correct_1'/>
+							</span>
+
+						</span>
+
+						<span id = "input_and_circle">
+							<input type = "text" class = "content_input mc_feedback" id = 'mc_feedback' value = 'Type Feedback'/> 
+
+						</span></br>
+
+						</br></br>
+					</div>
+
+					<span id = "mc_controls">
+						</br>
+						<div id = 'add_answer' class = 'circle'>+</div>
+						<div id = 'remove_answer' class = 'circle'>-</div>
+					</span>
+
+					</br>
+				</span>
+
+				<!-- TRUE FALSE -->
+				<span id = "tf_input">
+					<table id = "tf_table">
+					<tr>
+						<td>True</td><td><input id = "true" type = "radio" name = "tf" value = "1"></td>
+						<td>False</td><td><input id = "false" type = "radio" name = "tf" value = "0"></td>
+					</tr>
+					</table>
+					
+					</br>
+
+					<input class = "content_input" id = 'tf_feedback' value = 'Type Feedback if Correct'/> 
+					
+					</br>
+
+					<input class = "content_input" id = 'tf_hint' value = 'Type Feedback if Incorrect'/> 
+				</span>
+				
+				<!-- FILL IN THE BLANK -->
+				<span id = "fill_input">
+					<span style = "font-size: 20px;">Add Answer:</span>
+					</br></br>
+					<input class = "content_input" id = 'fill_answer' value = 'Type Answer'/> 
+						</br>
+					<input class = "content_input" id = 'fill_feedback' value = 'Type Feedback if Correct'/> 
+						</br>
+					<input class = "content_input" id = 'fill_hint' value = 'Type Feedback if Incorrect'/> 
+				</span>
+			</span>
+			<!-- ############################################## -->
+
+
+			<!-- MEDIA -->
+			<span class = "tab_content" id = "media_content">
+				<p id = "tab_title">Add Media Element:</p>
+				
+				<!--<div id = "information">i</div>--> 
+				
+				</br></br>
+
+				<p> Accepted file formats: MPEG 4/H.264, OGG, MP3, PNG, JPG, JPEG, GIF. All media files must be under 1.5 MB. MP4s with other codecs are not accepted at this time</p><br/>
+				
+				<select id = "file_location">
+					<option value = "desktop">File from Desktop</option>
+					<!-- <option value = "media_manager">File from Media Manager</option> -->
+				</select>
+
+				</br></br>
+
+				<span id = "d_top">
+					<input class = "content_input" id = 'media_header' value = 'Section Header'/> 
+
+					</br></br>
+
+					<span id = 'upload_wrapper'>
+						<input type = "file" id = "upload_file" name = "file"/>
+						</br></br>
+					</span>
+
+					<span id = "image_processing">
+						<p id = "sub_title">Preview</p>
+						</br>
+						<img width = "200" height = "120" id = "image_resize" src = "" />
+						</br>
+					</span>
+
+					<span id = "video_processing">
+						<p id = "sub_title">Preview</p>
+							
+							<video id = "video_resize" width="320" height="240" controls="controls">
+								
+							</video>
+							</br>
+
+					</span>
+                    
+                    
+                    <span id = "audio_processing">
+						<p id = "sub_title">Preview</p>
+						</br>
+						<audio id="audio_resize" controls="controls">  
+							  
+						</audio>
+						</br>
+					</span>
+         
+
+					<input class = "content_input" id = 'media_caption' value = 'Add Caption'/> 
+				</span>
+
+				<span id = "media_m">
+					<!-- Not Sure If Media Manger Will Exist -->
+				</span>
+
+			</span>
+
+			<!-- AUTHOR INFORMATION -->
+			<span class = "tab_content" id = "author_content">
+
+				<p id = "tab_title">Add Author Information:</p>
+				<!--<div id = "information">i</div>-->
+				</br></br>
+
+				<input class = "content_input" id = 'author_name' value = 'Enter Name'/> 
+				</br>
+
+				<input class = "content_input" id = 'author_affiliation' value = 'Enter Affiliations'/> 
+				</br></br>
+				Creative Commons License (<a target="_blank" href="../refs/CreativeCommons-licenses-HalfPage.pdf">what's this?</a>)
+				</br>
+
+				<select id = "creative_commons">
+					<option id = "cc_by" value = "cc_by">Creative Commons Attribution</option>
+					<option id = "cc_sharealike" value = "cc_by_sa">Creative Commons Attribution-ShareAlike</option>
+					<option id = "cc_noderivs" value = "cc_by_nd">Creative Commons Attribution-NoDerivatives</option>
+					<option id = "cc_nc" value = "cc_by_nc">Creative Commons Attribution-NonCommercial</option>
+					<option id = "cc_nc_sharealike" value = "cc_by_nc_sa">Creative Commons Attribution-NonCommercial-ShareAlike</option>
+					<option id = "cc_nc_noderivs" value = "cc_by_nc_nd">Creative Commons Attribution-NonCommercial-NoDerivatives</option>
+					<option id = "cc_none" value = "none">None (All Rights Reserved)</option>
+				</select>
+			</span>
+
+
+
+			<!-- ############################################## -->
+			<!-- END CONTENT FOR DIFFERENT ADD TABS -->
+
+		</div>
+	</div>
+
+	</td>
+	</tr>
+
+	<tr>
+		<td>
+			<span id = "vdf_group">
+			<a id = "view_preview" class = "vdf" href = "#"> Export </a>
+			<a id = "delete_preview" class = "vdf" href = "#"> Clear </a>
+			</span>
+		</td>
+
+		<td>
+			<div class = "add_button" id = "add_lo">Add</div>
+			<div class = "update_button" id = "update_lo">Update</div>
+		</td>
+	</tr>
+
+	</table>
+
+	<div style="clear:both"></div>
+	<!-- ############### -->
+
+
+</span>
+<!-- ############### -->
+
+
+
+
+</body>
+
+</html>

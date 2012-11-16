@@ -1,0 +1,217 @@
+/*This file is part of Open Case Builder from University of Michigan, a free open source application available at http://openmi.ch/casebuilder .*/
+
+body {
+	font-family:Arial, Helvetica, sans-serif;
+	padding: 0px;
+	margin: 0px;
+	color: black;
+	font-size: 14px;
+	font-family: sans-serif;
+	background-color: #BBB;
+}
+
+h1 {
+	color: #404040;
+	font-size: 40px;
+	/*text-shadow: black 1px 1px 1px;*/
+	display: inline;
+	width: 300px;
+}
+
+h2 {
+	color: #404040;
+	/*text-shadow: #BBB 1px 1px 1px;*/
+	display: inline;
+	font-size: 30px
+}
+
+h4 {
+	color: #757374;
+	text-shadow: #BBB 1px 1px 1px;
+	display: inline;
+	font-size: 18px;
+	font-weight: normal;
+	position: relative;
+}
+
+
+p {
+	width: 500px;
+	font-size: 12px;
+}
+
+video {
+	padding: 0px;
+}
+
+#break {
+	height: 1px;
+	background: white;
+	width: 600px;
+}
+
+#objectives{
+	color: black;
+	position: relative;
+	right: 20px;
+}
+
+#pat_list {
+	position: relative;
+	right: 20px;
+}
+
+#patient_info{
+	color: white;
+	list-style-type: none;
+}
+
+#bordered {
+	width: auto;
+	max-width: 500px;
+	word-wrap: break-word;
+	background-color: #C4C4C4;
+	color: black;
+	padding: 10px;
+	border-radius: 4px;	
+	font-size: 16px;
+}
+
+#q_underline {
+	width: 600px;
+	height: 1px;
+	background-color: black;
+	padding: none;
+	margin-top: 2px;
+}
+
+#spaced_ul {
+	display: inline-block;
+	width: 70px;
+	font-size: 20px;
+	position: relative;
+	right: 5px;
+	margin-bottom: 5px;
+}
+
+#spaced_ul li {
+	width: 500px;
+	margin-bottom: 5px;
+}
+
+#spaced_ul li:hover {
+	color: #569C43 !important;
+	cursor: pointer !important;
+}
+
+#answer {
+	height: 20px;
+	padding-left: 5px;
+}
+
+#reason {
+	position: relative;
+	left: 15px;
+	font-size: 13px;
+	color: #E2DC00;
+}
+
+#text_input {
+	width: 175px;
+}
+
+#p_caption {
+	position: relative;
+	bottom: 7px;
+	left: 20px;
+	font-size: 14px;
+	font-style: italic;
+}
+
+.text {
+	max-width: 500px;
+	word-wrap: normal;
+}
+
+#center_content {
+	width: 850px;
+	margin: 0 auto;
+	background-color: white;
+	padding: 15px;
+	box-shadow: 0 0 2px 2px #737373;
+}
+
+input[type=submit] { 
+	width: 70px;
+	height: 30px;
+	line-height: 20px;
+	text-align: center;
+	background-color: #404040;
+	font-size: 16px;
+	color: white;
+	border-radius: 5px;
+	border: none;
+}
+
+input[type=submit]:hover {
+	-webkit-transition: background-color 300ms linear;
+	-moz-transition: background-color 300ms linear;
+	-o-transition: background-color 300ms linear;
+	-ms-transition: background-color 300ms linear;
+	transition: background-color 300ms linear;
+	background-color: #569C43;
+	cursor: pointer;
+}
+
+input[type=text] {
+	height: 25px;
+	width: 250px;
+	font-size: 20px;
+	margin-bottom: 5px;
+}
+
+input[type=radio] {
+	width: 20px;
+	height: 20px;
+}
+
+label {
+	font-size: 18px;
+	position: relative;
+	bottom: 3px;
+}
+
+.response_wrapper {
+	display: inline-block;
+	position: relative;
+	bottom: 20px;
+}
+
+.response_c {
+	margin-left: 20px;
+	width: 30px;
+	height: 30px;
+	position: absolute;
+}
+
+.response_i {
+	margin-left: 20px;
+	width: 30px;
+	height: 30px;
+	position: absolute;
+}
+
+.feedback {
+	display: inline-block;
+	font-size: 16px;
+	position: relative;
+	left: 70px;
+	width: 500px;
+}
+
+.author_wrapper {
+	display: inline-block;
+	float: right;
+	width: 300px;
+
+}

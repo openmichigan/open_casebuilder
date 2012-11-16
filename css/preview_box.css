@@ -1,0 +1,186 @@
+/*This file is part of Open Case Builder from University of Michigan, a free open source application available at http://openmi.ch/casebuilder .*/
+
+h2 {
+	display: inline;
+	font-size: 26px;
+}
+
+#lo_list {
+	list-style-type: circle;
+	position: relative;
+	left: 55px;
+}
+
+.edit {
+	display: inline;
+	float: right;
+	position: relative;
+	top: 12px;
+	right: 20px;
+}
+
+.edit:hover {
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.remove {
+	display: inline;
+	float: right;
+	position: relative;
+	top: 12px;
+	padding-right: 10px;
+	right: 20px;
+}
+
+.remove:hover {
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+#border_box {
+	box-shadow: 2px 2px 5px #BBB;
+	padding: 5px;
+	border-radius: 4px;
+	background-color: #D4D4D4;
+}
+
+.correct_hidden {
+	display: none;
+}
+
+.feedback_hidden {
+	display: none;
+}
+
+.hint_hidden{
+	display: none;
+}
+
+#tf_table td tr {
+	padding: 5px;
+}
+
+.submit_answer {
+	line-height: 18px;
+	text-align: center;
+	display: inline-block !important;
+	width: 60px;
+	height: 20px;
+	padding: 5px;
+	border-radius: 5px;
+	background-color: #000934;
+	color: white;
+	font-size: 18px;
+}
+
+.submit_answer:hover {
+	-webkit-transition: background-color 300ms linear;
+	-moz-transition: background-color 300ms linear;
+	-o-transition: background-color 300ms linear;
+	-ms-transition: background-color 300ms linear;
+	transition: background-color 300ms linear;
+	background-color: #569C43;
+	cursor: pointer;
+}
+
+#mc_answers {
+	position: relative;
+	left: 20px;
+	margin-bottom: 5px;
+}
+
+#mc_answers li:hover {
+	color: green;
+	cursor: pointer;
+}
+
+.up {
+	width: 0; 
+	height: 0; 
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+	border-bottom: 6px solid black;
+	display: block;
+	float: right;
+	margin-left: 10px;
+	position: relative;
+	left: 15px;
+	bottom: 20px;
+}
+
+.down {
+	width: 0; 
+	height: 0; 
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+	border-top: 6px solid black;
+	display: block;
+	float: right;
+	position: relative;
+	left: 15px;
+	bottom: 15px;
+}
+
+.arrow_box {
+	display: inline-block;
+	height: 30px;
+	width: 30px;
+	position: relative;
+	top: 30px;
+	right: 30px;
+	margin-right: 0px;
+	padding: 0px;
+}
+
+.arrow_wrapper {
+	position: relative;
+	z-index: 5;
+	height: 20px;
+	width: 20px;
+	display: inline;
+}
+
+.arrow_wrapper:hover .up {
+	-webkit-transition: border-bottom-color 300ms linear;
+	-moz-transition: border-bottom-color 300ms linear;
+	-o-transition: border-bottom-color 300ms linear;
+	-ms-transition: border-bottom-color 300ms linear;
+	transition: border-bottom-color 300ms linear;
+	border-bottom-color: #fdd70f !important;
+	cursor: pointer;
+}
+
+.arrow_wrapper:hover .down {
+	-webkit-transition: border-top-color 300ms linear;
+	-moz-transition: border-top-color 300ms linear;
+	-o-transition: border-top-color 300ms linear;
+	-ms-transition: border-top-color 300ms linear;
+	transition: border-top-color 300ms linear;
+	border-top-color: #fdd70f !important;
+	cursor: pointer;
+}
+
+.wysiwyg_text {
+	position: relative;
+	max-width: 400px;
+	word-wrap: break-word;
+}
+
+#pat_list {
+	position: relative;
+	left: 40px;
+}
+
+#tf_prev_table {
+	font-size: 18px;
+}
+
+#tf_prev_table tr td {
+	padding: 5px;
+	margin: 0px;
+}
+
+#author_table tr > td {
+	padding-right: 10px;
+}

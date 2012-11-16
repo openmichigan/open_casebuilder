@@ -1,0 +1,15 @@
+/*This file is part of Open Case Builder from University of Michigan, a free open source application available at http://openmi.ch/casebuilder .*/
+
+#main_box {
+	width: 700px;
+	margin: 0 auto;
+	border-radius: 5px;
+	background-color: #000934;
+	padding: 10px;
+	position: relative;
+	top: 100px;
+	color: white;
+	font-size: 20px;
+	box-shadow: 0 0 2px 2px #BBB;
+	font-weight: lighter;
+}

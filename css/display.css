@@ -1,0 +1,190 @@
+/*This file is part of Open Case Builder from University of Michigan, a free open source application available at http://openmi.ch/casebuilder .*/
+
+body {
+	font-family:Arial, Helvetica, sans-serif;
+	background-color: #334873;
+	padding: 10px;
+	color: white;
+	font-size: 14px;
+}
+
+h1 {
+	color: #DBAE1A;
+	text-shadow: black 2px 2px 3px;
+	display: inline;
+}
+
+h2 {
+	color: #E2DC00;
+	text-shadow: black 1px 1px 10px;
+	display: inline;
+}
+
+h4 {
+	color: #E2DC00;
+	text-shadow: black 1px 1px 10px;
+	display: inline;
+}
+
+
+p {
+	width: 500px;
+	font-size: 12px;
+}
+
+#break {
+	height: 1px;
+	background: white;
+	width: 600px;
+}
+
+#objectives{
+	color: white;
+	position: relative;
+	right: 20px;
+}
+
+#pat_list {
+	position: relative;
+	right: 20px;
+}
+
+#patient_info{
+	color: white;
+	list-style-type: none;
+}
+
+#bordered {
+	min-width: auto;
+	max-width: 500px;
+	word-wrap: break-word;
+	width: auto;
+	background-color: white;
+	color: #2A387E;
+	padding: 5px;	
+}
+
+#q_underline {
+	width: 600px;
+	height: 1px;
+	background-color: #DBAE1A;
+	padding: none;
+	margin-top: 2px;
+}
+
+#spaced_ol {
+	position: relative;
+	right: 20px;
+}
+
+#spaced_ol li {
+	width: 500px;
+	margin-bottom: 20px;
+}
+
+#spaced_ol li:hover {
+	color: #85B4FF;
+	cursor: pointer;
+}
+
+#answer {
+	height: 20px;
+	padding-left: 5px;
+}
+
+#reason {
+	position: relative;
+	left: 15px;
+	font-size: 13px;
+	color: #E2DC00;
+}
+
+#text_input {
+	width: 175px;
+}
+
+#caption {
+	position: relative;
+	bottom: 7px;
+	font-size: 11px;
+}
+
+.text {
+	max-width: 500px;
+	word-wrap: normal;
+}
+
+.feedback {
+	position: relative;
+	left: 20px;
+	color: #E2DC00;
+	font-size: 12px;
+	display: none;
+	width: 400px;
+	white-space: break-word;
+}
+
+.show_feedback {
+	display: none;
+	font-size: 24px;
+	margin-right: 5px;
+}
+
+.show_feedback:hover {
+	cursor: pointer;
+	color: #E2DC00;
+}
+
+.mc_feedback {
+	color: #E2DC00;
+	font-size: 12px;
+	display: none;
+	position: relative;
+	left: 20px;
+	bottom: 10px;
+	width: 400px;
+	white-space: break-word;
+}
+
+.show_mc_feedback {
+	display: none;
+	font-size: 24px;
+	margin-right: 5px;
+	position: relative;
+	bottom: 10px;
+}
+
+.show_mc_feedback:hover {
+	cursor: pointer;
+	color: #E2DC00;
+}
+
+.response_img {
+	display: none;
+	width: 20px;
+	height: 20px;
+	position: relative;
+	top: 3px;
+	left: 5px;
+	border-radius: 50%;
+}
+
+.mc_feedback_wrapper{
+	position:relative;
+	bottom: 10px;
+}
+
+#download {
+	position: relative;
+	padding: 5px;
+	text-shadow: none;
+	left: 150px;
+	color: #334873;
+	background-color: white;
+	border-radius: 5px;
+}
+
+#download:hover {
+	color: orange;
+	cursor: pointer;
+}

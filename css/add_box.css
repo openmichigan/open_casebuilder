@@ -1,0 +1,168 @@
+/*This file is part of Open Case Builder from University of Michigan, a free open source application available at http://openmi.ch/casebuilder .*/
+
+html,body,div,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,pre,form,p,blockquote,fieldset,input,hr {margin:0; padding:0;}
+h1,h2,h3,h4,h5,h6,pre,code,address,caption,cite,code,em,th {font-size:1em; font-weight:normal; font-style:normal;}
+ul{list-style:none;}
+ol{position: relative; left: 30px;}
+fieldset,img,hr {border:none;}
+caption,th {text-align:left;}
+table {border-collapse:collapse; border-spacing:0;}
+td {vertical-align:top;}
+
+.lo_tab_input {
+	width: 300px;
+	height: 30px;
+	margin: 10px;
+	margin-left: 0px;
+	font-size: 18px;
+	display: inline-block !important;
+	color: #BBB;
+}
+
+.q_tab_answer {
+	width: 300px;
+	height: 30px;
+	margin: 2px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	font-size: 18px;
+	display: inline-block !important;
+	color: #BBB;
+}
+
+.content_input {
+	width: 300px;
+	height: 30px;
+	margin-right: 10px;
+	margin-bottom: 5px;
+	font-size: 18px;
+	display: inline-block !important;
+	color: #BBB;
+}
+
+input:focus {
+	border-style: solid;
+	border-width: 2px;
+	border-color: #000934;
+}
+
+input {
+	color: #BBB;
+}
+
+.circle {
+	line-height: 28px;
+	text-align: center;
+	display: inline-block !important;
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	background-color: #2f6cf5;
+	color: white;
+	font-size: 24px;
+	border: solid;
+	border-width: 2px;
+	border-color: #BBB;
+}
+
+.circle:hover {
+	-webkit-transition: border-color 300ms linear;
+	-moz-transition: border-color 300ms linear;
+	-o-transition: border-color 300ms linear;
+	-ms-transition: border-color 300ms linear;
+	transition: border-color 300ms linear;
+	border-color: #00078c;
+	cursor: pointer;
+}
+
+.pat_circle {
+	line-height: 20px;
+	text-align: center;
+	display: inline-block !important;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background-color: #2f6cf5;
+	color: white;
+	font-size: 14px;
+	border: solid;
+	border-width: 2px;
+	border-color: #BBB;
+}
+
+.pat_circle:hover {
+	-webkit-transition: border-color 300ms linear;
+	-moz-transition: border-color 300ms linear;
+	-o-transition: border-color 300ms linear;
+	-ms-transition: border-color 300ms linear;
+	transition: border-color 300ms linear;
+	border-color: #00078c;
+	cursor: pointer;
+}
+
+
+#tab_title {
+	font-size: 24px;
+	line-height: 24px;
+	display: inline;
+	width: auto;
+}
+
+#controls {
+	position: relative;
+}
+
+.pat_drop select{
+	display: inline-block;
+	width: 150px;
+	height: 40px;
+}
+
+#editor {
+	margin-left: -10px;
+}
+
+#tf_table tr td {
+	padding: 5px;
+	font-size: 20px;
+}
+
+#sub_title {
+	font-size: 24px;
+}
+
+#image_resize {
+	border: solid !important;
+	border-width: 2px !important;
+}
+
+#information {
+	display: inline-block;
+	position: relative;
+	color: white;
+	font-family: serif;
+	font-weight: 400;
+	font-size: 20px;
+	line-height: 20px;
+	text-align: center;
+	left: 10px;
+	width: 20px;
+	height: 20px;
+	padding: 0px;
+	margin: 0px;
+	background-color: #2F6CF5;
+	border: solid 2px #C2C2C2;
+	border-radius: 50%;
+}
+
+#information:hover {
+	border-color: #000934 !important;
+	cursor: pointer;
+
+	-webkit-transition: border-color 350ms linear !important;
+	-moz-transition: border-color 350ms linear !important;
+	-o-transition: border-color 350ms linear !important;
+	-ms-transition: border-color 350ms linear !important;
+	transition: border-color 350ms linear !important;
+}
+
