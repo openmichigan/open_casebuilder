@@ -131,21 +131,35 @@ function processQ(element) {
 
                 display_num++;
 
-                var true_label = "<table><tr><td><label for = 'true_" + q_num + "'>True</label></td>";
-                var true_input = "<td><input id = 'true_" + q_num + "' type = 'radio' name = 'tf_" 
-                        + q_num + "' value = '1' /></td><td></td></tr>";
+				var tf_fb_array = [];
+				
+				element.find('.feedback').each(function(index) {		
+					tf_fb_array.push($(this).text());
+				});
 
+                
+                var true_input = "<table><tr class='tf_answer'><td valign='top'><input id = 'true_" + q_num +
+					"' type = 'radio' name = 'tf_" + 
+                    + q_num + "' value = '1' /></td>";
+				var true_label = "<td valign='top'><label for = 'true_" + q_num + "'>True</label>" + 
+					"<br/><span class='feedback' style='display:none'>" + 
+					tf_fb_array[0] + 
+					"</span></td></tr>";
 
-                var false_label = "<tr><td><label for = 'false_" + q_num + "'>False</label></td>";
-                var false_input = "<td><input id = 'false_" + q_num + "' type = 'radio' name = 'tf_"
-                        + q_num + "' value = '0' /></td></tr></table>";
+                var false_input = "<tr class='tf_answer'><td valign='top'><input id = 'false_" + q_num + 
+					"' type = 'radio' name = 'tf_" + q_num + "' value = '0' /></td>";
+                var false_label = "<td valign='top'><label for = 'false_" + q_num + "'>False</label>" +
+					"<br/><span class='feedback' style='display:none'>" + tf_fb_array[1] + 
+					"</span></td></tr></table>";
 
-                var submit = "<input type = 'submit' value = 'Submit' /><div class = 'response_wrapper'>"
+                var submit = "";
+				
+				/*
+				var submit = "<input type = 'submit' value = 'Submit' /><div class = 'response_wrapper'>"
                 + "<img class = 'response_c' src = '../images/right.png'/><img class = 'response_i' src = '../images/wrong.png'/></div>"
-                + "<div class = 'feedback' /></br></br></br>";
+                + "<div class = 'feedback' /></br></br></br>"; */
 
-                var all_content = "<span class = 'tf_" + q_num + "'>" + true_label + true_input + false_label +
-                false_input + submit + "</span>";
+                var all_content = "<span class = 'tf_" + q_num + "'>" + true_input + true_label + false_input + false_label+"</span>";
 
                 $('#center_content').append(all_content);
 
@@ -157,9 +171,11 @@ function processQ(element) {
                 $('#center_content').append("<h2>Q" + display_num + ": " + element.find('h2').text() 
                 + "</h2></br><h4>(Click on the Correct Answer)</h4><div id = 'q_underline'></div>");
 
-                var submit = "<input type = 'submit' value = 'Submit' /><div class = 'response_wrapper'>"
+                /*var submit = "<input type = 'submit' value = 'Submit' /><div class = 'response_wrapper'>"
                 + "<img class = 'response_c' src = '../images/right.png'/><img class = 'response_i' src = '../images/wrong.png'/></div>"
-                + "<div class = 'feedback' /></br></br></br>";
+                + "<div class = 'feedback' /></br></br></br>";*/
+				
+				var submit = "";
 
                 display_num++;
 
@@ -168,10 +184,18 @@ function processQ(element) {
 
                 var count = 1;
 
-                element.find('li').each(function() {
+				var mc_fb_array = [];
+				
+				element.find('.feedback').each(function(index) {		
+					mc_fb_array.push($(this).text());
+				});
+
+
+                element.find('li').each(function(index) {
                         var li_element = $("<li id = '" + count + "' class = 'mc_answer' >" + $(this).text() + "</li>");
-                        mc_list.find('ol').append(li_element);
-                        count++
+						li_element.append("<br/><span class='feedback' style='display:none'>"+ mc_fb_array[index] + "</span");
+						mc_list.find('ol').append(li_element);         
+						count++
                 });
         }
 }
@@ -204,19 +228,16 @@ function processMedia(element) {
 }
 
 function saveData(answers, feedback) {
-
         for(var i = 1; i < answers.length; i++) {
                 var answer = $("<span></span>");
-                answer.addClass('answer').attr('id', i.toString()).html(answers[i]).css('display', 'none');
-                $('body').append(answer);
-        }
-
-        for(var i = 1; i < feedback.length; i++) {
                 var fb = $("<span></span>");
+                
                 fb.addClass('feedback').attr('id', i.toString()).css('display', 'none');
-                for(var j = 0; j < feedback[i].length; j++) {
-                        fb.append(feedback[i][j] +',');
-                }
+                fb.append(feedback[i][i]);
+                
+                answer.addClass('answer').attr('id', i.toString()).html(answers[i]).css('display', 'none');
+                
+                $('body').append(answer);
                 $('body').append(fb);
         }
 }

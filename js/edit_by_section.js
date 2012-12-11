@@ -208,19 +208,39 @@ $(document).ready(function() {
 			}
 			update_count++;
 
-
 			question_wrapper.find('h2').html($("#q_input").val());
 			$("#mc_answers").empty();
-			$(".q_tab_answer").each(function() {
-				$("#mc_answers").append("<li>" + $(this).val() + "</li>");
-			});
-
+			
+			
+			
 			//Update Answer and Feedback
+			
+			//Update stored values
 			feedback_array[question_num] = [];
+			mc_feedback_array = [];
 			$(".mc_feedback").each(function() {
 				feedback_array[question_num].push($(this).val());
+				mc_feedback_array.push($(this).val());
 			});
-			question_answers[question_num] = $("input[name=mc_correct]:checked").val();
+		
+			mc_correct = $("input[name=mc_correct]:checked").val();
+			question_answers[question_num] = mc_correct
+			
+			//Update display
+	
+			$(".q_tab_answer").each(function(index) {
+				$("#mc_answers").append("<li>" + $(this).val() + "</li>");
+				
+				if ((index +1) == mc_correct) {
+					$("#mc_answers").append("<ul>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='feedback'>" + "Correct: " + 			
+						mc_feedback_array[index] + "</span></ul>");
+				}
+				else {						
+					$("#mc_answers").append("<ul>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='feedback'>" + 
+						mc_feedback_array[index] + "</span></ul>");
+				}
+			});
+
 
 			//Replace Update Button with Add
 			$(".update_button").hide();
@@ -346,9 +366,7 @@ $(document).ready(function() {
 				$("#desktop").show();
 				$("#media_manger").hide();
 				$("#image_processing").hide();
-				$("#video_processing").hide();
-
-				
+				$("#video_processing").hide();				
 				$("#audio_processing").hide();
 				
 			}, 200);
@@ -538,23 +556,43 @@ $(document).ready(function() {
 
 		question_wrapper.find('h2').html($("#q_input").val());
 
+		feedback_sel_true = "";
+		feedback_sel_false = ""; 
+
+		var q_content = question_wrapper.html();
+		tf_old_fb_array = [];
+		question_wrapper.find('.feedback').each(function(index) {		
+			tf_old_fb_array.push($(this).text());
+		});
+
 		if($("#true").is(':checked') ){
 			question_answers[question_num] = 1;
+			feedback_sel_true = "Correct: " + $("#tf_feedback").val();
+			feedback_sel_false= "Incorrect. Hint: " + $("#tf_hint").val();
 		}
-		else{
-			question_answers[question_num] = 0;			
+		else {
+			question_answers[question_num] = 0;	
+			feedback_sel_false = "Correct: " + $("#tf_feedback").val();
+			feedback_sel_true= "Incorrect. Hint: " + $("#tf_hint").val();	
 		}
+		
+		q_content = q_content.replace(tf_old_fb_array[0], feedback_sel_true);
+		q_content = q_content.replace(tf_old_fb_array[1], feedback_sel_false);
+    	question_wrapper.html(q_content);
+		
 		feedback_array[question_num][0] = $("#tf_feedback").val();
 		feedback_array[question_num][1] = $("#tf_hint").val();
-
+			
+		
 		//Replace Update with Add
 		$(".update_button").hide();
 		$(".add_button").show().css('display', 'inline-block');
 		
 		//Reset Tab
 		$("#q_content").hide().html(q_default);
-		$("#tf_input").hide();
+		$("#fill_input").hide();
 		$("#mc_input").hide();
+		$("#tf_input").show();
 		$("#q_content").show();
 
 	});
@@ -604,7 +642,7 @@ function populateLo(){
 
 		input = $("<span class = 'input_and_circle'>" +
 		"<input id = '" + id + "' class = 'lo_tab_input' value = '" + $(this).html() +
-		"'/> <div class = 'circle'>?</div></span>");
+		"'/>");
 
 		input.find('.lo_tab_input').css('color', 'black');
 

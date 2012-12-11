@@ -15,7 +15,7 @@ var file_type;
 
 var defaults = new Array(
 	'Enter Learning Objective', 'Enter Age', 'Enter Region or Country', 'Enter Other Details', 'Enter Header/Bold Text', 'Type Question', 'Type Answer', 'Type Feedback if Correct',
-	'Type Feedback if Incorrect', 'Enter Option', 'Type Feedback', 'Add Caption', 'Enter Name', 'Enter Affiliations',
+	'Type Hint if Incorrect', 'Enter Option', 'Type Feedback', 'Add Caption', 'Enter Name', 'Enter Affiliations',
 	'Section Header'
 );
 
@@ -123,7 +123,7 @@ $(document).ready(function() {
 				num_lo = 0
 				var lo_empty = 'Enter Learning Objective';
 				$(".lo_tab_input").each(function(){		//check that lo's are not null
-				if($(this).val().indexOf(lo_empty) !=-1){
+					if($(this).val().indexOf(lo_empty) !=0){
 						num_lo+=1;
 					}
 				});
@@ -303,7 +303,10 @@ $(document).ready(function() {
 	
 					$("#preview").append(user_answer_input);
 					num_q++;
-				}
+					
+					//Reset Tab
+					
+				} //end add fill in the blank question
 	
 				//True / False
 				if($("#question_type").val() == 'tf'){
@@ -319,10 +322,29 @@ $(document).ready(function() {
 					"<p id = 'q_remove' class = 'remove'>Remove</p></br>";
 					
 					input_id = 'tf_' + num_q.toString(); 
-					var user_answer_input = question + "<table id = 'tf_prev_table'><tr><td>True</td><td><input type = 'radio' name = '" + input_id + "' value = '1'/></td></tr>" +
-					"<tr><td>False</td><td><input type = 'radio' name = '" + input_id + "' value = '0'/></td></tr></table>" +
-					"<div class = 'submit_answer'>Submit</div></br>";
-	
+					
+					tf_correct = $('input:radio[name=tf]:checked').val();
+					
+					feedback_sel_true = "";
+					feedback_sel_false = ""; 
+					
+					if(tf_correct==1) {
+						feedback_sel_true = "Correct: " + $("#tf_feedback").val();
+						feedback_sel_false= "Incorrect. Hint: " + $("#tf_hint").val();
+					}
+					else {
+						feedback_sel_false = "Correct: " + $("#tf_feedback").val();
+						feedback_sel_true= "Incorrect. Hint: " + $("#tf_hint").val();
+					}
+					
+					var user_answer_input = question + 
+					"<table id = 'tf_prev_table'><tr><td><input type = 'radio' name = '" + input_id + "' value = '1'/></td><td>True"	
+					+ "<br/><span class='feedback'>" + feedback_sel_true + "</span>" + 
+					"</td></tr>" +
+					"<tr><td><input type = 'radio' name = '" + input_id + "' value = '0'/></td><td>False"+ 
+					"<br/><span class='feedback'>" + feedback_sel_false + "</span>" + 
+					"</td></tr></table>"; 
+
 					user_answer_input = "<span class = 'tf_wrapper question_wrapper preview_element' id = 'question_" + num_q + "'>"  
 					+ user_answer_input + "</br></span>";
 	
@@ -335,7 +357,8 @@ $(document).ready(function() {
 	
 					$("#preview").append(user_answer_input);
 					num_q++;
-				}
+			
+				} // end add true-false question
 	
 				//Multiple Choice
 				if($("#question_type").val() == 'mc'){
@@ -359,31 +382,49 @@ $(document).ready(function() {
 	
 					input_id = 'mc_' + num_q.toString();
 					var choices = $("<ul id = 'mc_answers'></ul>");
-					$(".q_tab_answer").each(function(){
-						choices.append("<li>" + $(this).val() + "</li>");
-					});
-				
-					choices = "<span class = 'mc_wrapper question_wrapper preview_element' id = 'question_" + num_q + "'>" + question 
-					+ "<ul id = 'mc_answers'>" + choices.html() + "</ul>" + "<div class = 'submit_answer'>Submit</div><br /><br /></span>"; 
-					$("#preview").append(choices);
 					
 					mc_feedback_array = [];
 					$(".mc_feedback").each(function() {
 						mc_feedback_array.push($(this).val());
 					});
+					
+					mc_correct = $("input[name=mc_correct]:checked").val();
+					
+
+					$(".q_tab_answer").each(function(index){
+						choices.append("<li>" + $(this).val() + "</li>");						
+						if ( (index +1) == mc_correct) {
+							choices.append("<ul>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='feedback'>" + "Correct: " + 
+								mc_feedback_array[index] + "</span></ul>");
+						}
+						else {						
+							choices.append("<ul>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='feedback'>" + mc_feedback_array[index] + 
+							"</span></ul>");
+						}
+					});
+				
+					choices = "<span class = 'mc_wrapper question_wrapper preview_element' id = 'question_" + num_q + "'>" + question 
+					+ "<ol id = 'mc_answers'>" + choices.html() + "</ol><br /><br /></span>"; 
+					$("#preview").append(choices);
+					
 	
 					feedback_array[num_q] = mc_feedback_array;
 					question_answers[num_q] = $("input[name=mc_correct]:checked").val();
 	
 					num_q++;
-				}
-	
-				//Reset Tab
+					
+					mc_num = 1;	
+					
+				} // End add Multiple choice question
+				
+				//Reset Tab, back to default question type
 				$("#q_content").empty().hide().append(q_default).fadeIn();
-				$("#tf_input").hide();
-				$("#mc_input").hide();	
-				mc_num = 1;	
-			}
+				$("#fill_input").hide();
+				$("#tf_input").hide();	
+				$("#mc_input").show();	
+
+					
+			} //end Question tab
 			//Media///////////////////////////
 			if($(this).attr('id') == 'add_media'){
 				img_location = $("#image_resize").attr('src');
@@ -622,7 +663,7 @@ $(document).ready(function() {
 	
 			//Fill in the Blank Negative Feedback
 			if($(this).attr('id') == 'fill_hint' && $(this).val() == '') {
-				$(this).css('color', '#BBB').val('Type Feedback if Incorrect');
+				$(this).css('color', '#BBB').val('Type Hint if Incorrect');
 			}
 	
 			//True / False Positive Feedback
@@ -632,7 +673,7 @@ $(document).ready(function() {
 	
 			//True / False Negative Feedback
 			if($(this).attr('id') == 'tf_hint' && $(this).val() == '') {
-				$(this).css('color', '#BBB').val('Type Feedback if Incorrect');
+				$(this).css('color', '#BBB').val('Type Hint if Incorrect');
 			}
 	
 			//Multiple Choice Answers
