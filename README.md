@@ -1,1 +1,3 @@
-Open Case Builder is an open source downloadable web app that can be used to create instructional modules such as patient cases, quizzes, and readings. The author completes simple forms to insert text, media, and questions and uses arrows to arrange them in the desired order. No Internet connection, knowledge of HTML or web page design is required.
+Open Case Builder is an open source downloadable web app that can be used to create instructional modules such as patient cases, quizzes, and readings. The author completes simple forms to insert text, media, and questions and uses arrows to arrange them in the desired order. No Internet connection, knowledge of HTML or web page design is required. On the GitHub page at http://openmi.ch/casebuilder click the Zip button to download the latest release. 
+
+NOTE: The current release is designed to work with the Google Chrome free web browser. Other web browsers may not support full functionality for Open Case Builder. 
