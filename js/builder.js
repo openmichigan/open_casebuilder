@@ -233,12 +233,13 @@ $(document).ready(function() {
 			//Text///////////////////////////
 			if($(this).attr('id') == 'add_text'){
 				var data = CKEDITOR.instances.editor.getData();
+				;
 				static_data = data;
 				if($("#add_border").is(':checked')){
-					data = "<div id = 'border_box'>" + "<span class = 'wysiwyg_text'>" + data + "</span>" + "</div>";
+					data = "<div id = 'border_box'>" + "<div class = 'wysiwyg_text'>" + data + "</div>" + "</div>";
 				}
 				else{
-					data = "<span class = 'wysiwyg_text'>" + data + "</span>";
+					data = "<div class = 'wysiwyg_text'>" + data + "</div>";
 				}
 	
 				var header_text = $('#text_header').val();
@@ -249,14 +250,14 @@ $(document).ready(function() {
 					alert('Please add text content first.');
 					return false;
 				}
-	
+				
 				header = "<h2>" + header_text + "</h2>" + "<p class = 'edit text_tab_edit'>Edit</p>" +
 				"<p id = 'text_remove' class = 'remove'>Remove</p>";
 	
-				all_text = "<span class = 'text_wrapper preview_element'>" +
+				all_text = "<div class = 'text_wrapper preview_element'>" +
 				"<span class = 'arrow_box'><span class = 'arrow_wrapper'><div class = 'up'></div></span><span class = 'arrow_wrapper'><div class = 'down'></div></span></span>"
-				 + header + data + "</br></span>";
-	
+				 + header + data + "</br></div>";
+
 				//Add to Preview
 				$("#preview").append(all_text);
 				//Reset Text Tab

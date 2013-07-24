@@ -2,7 +2,7 @@
 
 html,body,div,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,pre,form,p,blockquote,fieldset,input,hr {margin:0; padding:0;}
 h1,h2,h3,h4,h5,h6,pre,code,address,caption,cite,code,em,th {font-size:1em; font-weight:normal; font-style:normal;}
-ul{list-style:none;}
+ul{list-style:disc;}
 ol{position: relative; left: 30px;}
 fieldset,img,hr {border:none;}
 caption,th {text-align:left;}

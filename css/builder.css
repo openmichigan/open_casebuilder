@@ -3,7 +3,7 @@
 
 html,body,div,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,pre,form,p,blockquote,fieldset,input,hr {margin:0; padding:0;}
 h1,h2,h3,h4,h5,h6,pre,code,address,caption,cite,code,em,th {font-size:1em; font-weight:normal; font-style:normal;}
-ul {list-style:none;}
+ul {list-style:disc;}
 fieldset,img,hr {border:none;}
 caption,th {text-align:left;}
 table {border-collapse:collapse; border-spacing:0;}
@@ -82,7 +82,7 @@ html body {
 
 #nav {
 	position: relative;
-	bottom: 40px;
+	bottom: 20px;
 	padding-left: 0px;
 	border-top: solid;
 	border-bottom: solid;
@@ -256,10 +256,10 @@ html body {
 	margin: 0px;
 	margin-top: 10px;
 	bottom: 13px;
-	left: 350px;
+	left: 250px;
 	display: inline-block;
 	height: 35px;
-	width: 100px;
+	width: 150px;
 	background-color: #000934;
 	text-decoration: none;
 	color: white;
@@ -286,7 +286,7 @@ html body {
 	bottom: 2px;
 	display: inline-block;
 	height: 35px;
-	width: 85px;
+	width: 150px;
 	background-color: #000934;
 	text-decoration: none;
 	color: white;
@@ -391,7 +391,7 @@ html body {
 	position: relative;
 	right: 10px;
 	min-width: 1100px;
-	min-height: 1000px;
+	min-height: 600px;
 	padding: 0px;
 	margin: 0px;
 	overflow: hidden;

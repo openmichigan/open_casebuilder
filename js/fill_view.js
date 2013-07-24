@@ -92,7 +92,8 @@ function processPat(element) {
 
 function processText(element) {
         $('#center_content').append("<h2>" + element.find('h2').text() + "</h2><div id = 'break'></div>");
-        var text = element.find('.wysiwyg_text').find('p').clone();
+		//var text = element.find('.wysiwyg_text').find('p').clone();
+		var text = element.find('.wysiwyg_text').clone();
         
         if(element.find('#border_box').html()){
                 text.attr('id', 'bordered');

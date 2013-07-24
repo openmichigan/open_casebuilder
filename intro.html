@@ -5,7 +5,23 @@
 <head>
 	<link href = 'css/generic.css' rel = 'stylesheet' type = 'text/css' />
 	<link href="css/builder.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="../js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript">
+
+window.onload = function () {
+	 var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+    var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+
+	
+	if(!isChrome){
+ 		alert('Please change your web browser. We recommend using Google Chrome free web browser in order to be able to use the full functionality of the Open Case Builder System.');
+	}
+};
+	
+	
+</script>
 </head>
+
 
 <body>
 
@@ -29,11 +45,23 @@
 <!-- ############### -->
 
 <div id = 'main_box'>
-	<p>Open Case Builder is a downloadable web app that can be used to create instructional modules such as patient cases, scenarios, quizzes, or readings. Simply fill out the forms to insert text, media, and questions and use the arrows to arrange them in the desired order. No Internet connection nor knowledge of web page design (HTML) is required.  </p>
-	<br /> 
-  <p>If you plan to integrate audio or video with your case, due to some restrictions with the HTML5 format, we recommed that authors and learners use <a href="http://www.google.com/chrome">Google Chrome</a>, a free web browser.</p>
+	<p>Open Case Builder is a downloadable web app that can be used to create instructional modules such as patient cases, scenarios, quizzes, or readings. Simply fill out the forms to insert text, media, and questions and use the arrows to arrange them in the desired order. No Internet connection nor knowledge of web page design (HTML) is required. </p>
+	<p>&nbsp;</p>
+	<p>Click <a href="html/builder.html">Create Case</a> to begin. Be sure to preview and export your case before you exit the Create Case page, as the current version of Open Case Builder does not allow authors to import or return to previous cases. </p>
+
   
 </div>
+<br/>
 
+<div class="notice_box">
+  <p><strong>NOTE:</strong> This application is designed to work with the <a href="http://www.google.com/chrome">Google Chrome</a> free web browser. Other web browsers may not support full functionality for Open Case Builder. Due to some restrictions with the HTML5 format regarding presentation of audio and video, we recommend that both authors and learners use Google Chrome to create and view the cases that integrate audio or video. </p> 
+<p align="center">
+<a href="http://www.google.com/chrome">
+<img src="images/google_chrome.png" width="75" height="75" alt="Google Chrome" longdesc="http://www.google.com/chrome" align="middle"></a>
+</p></div>
+<br>
+<div class="notice_box">
+<p>Release: Open Case Builder v 1.2. Last revised April 9, 2013.</p>
+</div>
 </body>
 </html>
