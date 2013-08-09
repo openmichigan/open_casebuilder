@@ -32,8 +32,15 @@ var author_array = [];
 var is_video;
 var num_q = 1;
 
-
 $(document).ready(function() {
+
+        //
+        //Give warnings that "contents will be lost" before going away
+        //
+        //This is for page reload or other navigation events (The CLear Contents check is done within rearrange.js)
+        $(window).bind('beforeunload',function(event){
+                return "All your current work will be lost!";
+        });
 
         //Highlight focused tab
         tabHighlight();

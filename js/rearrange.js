@@ -4,7 +4,11 @@
 $(document).ready(function() {
 
 		////////CLEAR CASE BUTTON////////////
-        $("#delete_preview").click(function() {
+		$("#delete_preview").click(function() {
+			// Verify they really want to remove everything!
+			var confirmed = confirm("All your current work will be lost!\nAre you sure you want to clear everything and start over?");
+			if (confirmed === false) { return; }
+
 			$("#preview").empty();
 			question_answers = new Array();
 			feedback_array = new Array();
