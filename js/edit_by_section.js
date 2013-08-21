@@ -89,7 +89,7 @@ $(document).ready(function() {
 			update_count++;
 
 			question_wrapper.find('h2').html($("#q_input").val());
-			question_answers[question_num] = $("#fill_answer").val();
+			correct_answers[question_num] = $("#fill_answer").val();
 			feedback_array[question_num][0] = $("#fill_feedback").val();
 			feedback_array[question_num][1] = $("#fill_hint").val();
 
@@ -172,7 +172,6 @@ $(document).ready(function() {
 		question_wrapper = $(this).parent('span');
 		question_num = question_wrapper.attr('id');
 		question_num = question_num.substring(question_num.indexOf('_') + 1);
-
 		//Replace Add with Update
 		$(".add_button").hide();
 		$(".update_button").attr('id', 'update_mc_button');
@@ -187,7 +186,6 @@ $(document).ready(function() {
 		//Update Prep
 		$('#q_input').css('color', 'black');
 		populateMC(question_wrapper, question_num);
-
 		//Bring Tab Back to View
 		window.setTimeout(function(){
 			$("#question_type").val('mc');
@@ -208,39 +206,43 @@ $(document).ready(function() {
 			}
 			update_count++;
 
+			//Update the question text
 			question_wrapper.find('h2').html($("#q_input").val());
-			$("#mc_answers").empty();
-			
-			
-			
+			question_wrapper.find("#mc_answers").empty();
+
 			//Update Answer and Feedback
 			
 			//Update stored values
 			feedback_array[question_num] = [];
-			mc_feedback_array = [];
+			var mc_answer_array = [];
+			var mc_feedback_array = [];
 			$(".mc_feedback").each(function() {
 				feedback_array[question_num].push($(this).val());
 				mc_feedback_array.push($(this).val());
 			});
 		
 			mc_correct = $("input[name=mc_correct]:checked").val();
-			question_answers[question_num] = mc_correct
+			correct_answers[question_num] = mc_correct;
 			
 			//Update display
 	
 			$(".q_tab_answer").each(function(index) {
-				$("#mc_answers").append("<li>" + $(this).val() + "</li>");
-				
+				mc_answer_array.push($(this).val()) ;
+				question_wrapper.find("#mc_answers").append("<li>" + $(this).val() + "</li>");
+
 				if ((index +1) == mc_correct) {
-					$("#mc_answers").append("<ul>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='feedback'>" + "Correct: " + 			
+					question_wrapper.find("#mc_answers").append("<ul>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='feedback'>" + "Correct: " +
 						mc_feedback_array[index] + "</span></ul>");
 				}
-				else {						
-					$("#mc_answers").append("<ul>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='feedback'>" + 
+				else {
+					question_wrapper.find("#mc_answers").append("<ul>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='feedback'>" +
 						mc_feedback_array[index] + "</span></ul>");
 				}
 			});
 
+
+			answer_array[question_num] = mc_answer_array;
+			feedback_array[question_num] = mc_feedback_array;
 
 			//Replace Update Button with Add
 			$(".update_button").hide();
@@ -566,19 +568,19 @@ $(document).ready(function() {
 		});
 
 		if($("#true").is(':checked') ){
-			question_answers[question_num] = 1;
+			correct_answers[question_num] = 1;
 			feedback_sel_true = "Correct: " + $("#tf_feedback").val();
 			feedback_sel_false= "Incorrect. Hint: " + $("#tf_hint").val();
 		}
 		else {
-			question_answers[question_num] = 0;	
+			correct_answers[question_num] = 0;
 			feedback_sel_false = "Correct: " + $("#tf_feedback").val();
 			feedback_sel_true= "Incorrect. Hint: " + $("#tf_hint").val();	
 		}
 		
 		q_content = q_content.replace(tf_old_fb_array[0], feedback_sel_true);
 		q_content = q_content.replace(tf_old_fb_array[1], feedback_sel_false);
-    	question_wrapper.html(q_content);
+		question_wrapper.html(q_content);
 		
 		feedback_array[question_num][0] = $("#tf_feedback").val();
 		feedback_array[question_num][1] = $("#tf_hint").val();
@@ -624,7 +626,7 @@ function populateFITB(wrapper, q_num){
 	$("#q_input").val(wrapper.find("h2").html());
 
 	//Answer
-	$("#fill_answer").val(question_answers[q_num]);
+	$("#fill_answer").val(correct_answers[q_num]);
 
 	//Feedback
 	$("#fill_feedback").val(feedback_array[q_num][0]);
@@ -655,12 +657,13 @@ function populateLo(){
 }
 
 function populateMC(wrapper, q_num){
-
 	$("#q_input").val(wrapper.find('h2').html());
 	$(".mc_group").remove();
 
 	mc_num = 1;
-	$("#mc_answers li").each(function(){
+	var index = mc_num - 1;
+
+	wrapper.find("#mc_answers li").each(function() {
 
 		id = "mc_" + mc_num.toString();
 		
@@ -672,9 +675,9 @@ function populateMC(wrapper, q_num){
 		"<span class = 'correct_radio'> Correct" + 
 		"<input type = 'radio' name = 'mc_correct' class = 'mc_radio' id = 'mc_correct_" + mc_num + "' value = '" + mc_num + "'/></span>" +
 
-		//use mc_num - 1 since this array is populated with .push(), not question #
+		//use index since this array is populated with .push(), not question #
 		"<span class = 'input_and_circle'>" +
-		"<input id = 'mc_feedback' class = 'content_input mc_feedback' value = '" + feedback_array[q_num][mc_num - 1] + "'/>" +
+		"<input id = 'mc_feedback' class = 'content_input mc_feedback' value = '" + feedback_array[q_num][index] + "'/>" +
 		"</span></br>" +
 		"</br></br></div>");
 
@@ -683,13 +686,14 @@ function populateMC(wrapper, q_num){
 
 		$("#mc_controls").before($(input).show());
 		mc_num++;
+		index++;
 
 	});
 
 	mc_num--;
 
 	//Check correct radio
-	answer = question_answers[q_num];
+	answer = correct_answers[q_num];
 	answer_id = "#mc_correct_" + answer;
 	$(answer_id).attr('checked', 'checked');
 	$(answer_id).parents('.mc_group').find('input:text').css('background-color', '#FBFFB3');
@@ -777,7 +781,7 @@ function textColorText(){
 function populateTF(wrapper, q_num){
 
 	$("#q_input").val(wrapper.find('h2').html());
-	if(question_answers[q_num] == 1){
+	if(correct_answers[q_num] == 1){
 		//set true
 		$('#true').attr('checked', 'checked');
 	}

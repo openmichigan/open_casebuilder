@@ -31,7 +31,7 @@ $(document).ready(function() {
 		//Fill in the Blank
 		if(q_type == 'fitb') {
 			//correct
-			if(q_parent.find('input[type=text]').val().toLowerCase() == answers[q_num].toLowerCase() ) {
+			if(q_parent.find('input[type=text]').val().toLowerCase() == correct_answers[q_num].toLowerCase() ) {
 				q_parent.find('.response_i').hide();
 				q_parent.find('.response_c').attr('src', $('#preloaded_right').attr('src'));
 				q_parent.find('.response_c').show();
@@ -45,7 +45,7 @@ $(document).ready(function() {
 				q_parent.find('.feedback').html(feedback[q_num][1]);
 			}
 		}
-	
+
 	});	//end submit click
 
 });		//end document

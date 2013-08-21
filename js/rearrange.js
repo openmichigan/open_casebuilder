@@ -10,8 +10,9 @@ $(document).ready(function() {
 			if (confirmed === false) { return; }
 
 			$("#preview").empty();
-			question_answers = new Array();
+			correct_answers = new Array();
 			feedback_array = new Array();
+			answer_array = new Array();
 			num_q = 1;
 		})
 		
@@ -54,11 +55,10 @@ $(document).ready(function() {
 			var q_wrapper = $(this).parent('.question_wrapper');
 			remove_num = q_wrapper.attr('id').substring(9);
 			q_wrapper.remove();
-			
-			//fix arrays
-			feedback_array.splice(remove_num, 1);
-			question_answers.splice(remove_num, 1);
-			num_q--;
+			//fix arrays (Don't actually remove entries, just null them out!)
+                        answer_array[remove_num] = null;
+                        feedback_array[remove_num] = null;
+                        correct_answers[remove_num] = null;
 		});
 	
 		//MEDIA

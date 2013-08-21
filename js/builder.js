@@ -1,7 +1,7 @@
 //This file is part of Open Case Builder from University of Michigan, 
 //a free open source application available at http://openmi.ch/casebuilder.
 
- //Number of Inputs
+//Number of Inputs
 var input_num = 1;
 var mc_num = 1;
 
@@ -26,7 +26,8 @@ var text_default;
 var q_default;
 var media_default;
 var lo_clicks = 0;
-var question_answers = [];
+var correct_answers = [];
+var answer_array = [];
 var feedback_array = [];
 var author_array = [];
 var is_video;
@@ -80,11 +81,12 @@ $(document).ready(function() {
 				var quota_err = "QUOTA_EXCEEDED_ERR: DOM Exception 22"
 				
 				try {
-				   window.localStorage.setItem('builder_preview', JSON.stringify(preview_content));
-                	window.localStorage.setItem('case_name', $('#case_name').val());
-                	window.localStorage.setItem('answers', JSON.stringify(question_answers));
-                	window.localStorage.setItem('feedback', JSON.stringify(feedback_array));
-                	window.localStorage.setItem('loaded', 0);
+					window.localStorage.setItem('builder_preview', JSON.stringify(preview_content));
+					window.localStorage.setItem('case_name', $('#case_name').val());
+					window.localStorage.setItem('correct_answers', JSON.stringify(correct_answers));
+					window.localStorage.setItem('answers', JSON.stringify(answer_array));
+					window.localStorage.setItem('feedback', JSON.stringify(feedback_array));
+					window.localStorage.setItem('loaded', 0);
 					var w = window.open('../html/view.html', false);
 
 				} catch ( e ) {
@@ -306,12 +308,12 @@ $(document).ready(function() {
 					fb_feedback_array.push($("#fill_feedback").val());
 					fb_feedback_array.push($("#fill_hint").val());
 	
-					question_answers[num_q] = $("#fill_answer").val();
+					correct_answers[num_q] = $("#fill_answer").val();
 					feedback_array[num_q] = fb_feedback_array;
 	
 					$("#preview").append(user_answer_input);
 					num_q++;
-					
+
 					//Reset Tab
 					
 				} //end add fill in the blank question
@@ -344,7 +346,7 @@ $(document).ready(function() {
 						feedback_sel_false = "Correct: " + $("#tf_feedback").val();
 						feedback_sel_true= "Incorrect. Hint: " + $("#tf_hint").val();
 					}
-					
+
 					var user_answer_input = question + 
 					"<table id = 'tf_prev_table'><tr><td><input type = 'radio' name = '" + input_id + "' value = '1'/></td><td>True"	
 					+ "<br/><span class='feedback'>" + feedback_sel_true + "</span>" + 
@@ -360,7 +362,7 @@ $(document).ready(function() {
 					tf_feedback_array.push($("#tf_feedback").val());
 					tf_feedback_array.push($("#tf_hint").val());
 	
-					question_answers[num_q] = $('input:radio[name=tf]:checked').val();
+					correct_answers[num_q] = $('input:radio[name=tf]:checked').val();
 					feedback_array[num_q] = tf_feedback_array;
 	
 					$("#preview").append(user_answer_input);
@@ -399,6 +401,7 @@ $(document).ready(function() {
 					mc_correct = $("input[name=mc_correct]:checked").val();
 					
 
+					var mc_answer_array = [];
 					$(".q_tab_answer").each(function(index){
 						choices.append("<li>" + $(this).val() + "</li>");						
 						if ( (index +1) == mc_correct) {
@@ -409,15 +412,16 @@ $(document).ready(function() {
 							choices.append("<ul>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='feedback'>" + mc_feedback_array[index] + 
 							"</span></ul>");
 						}
+						mc_answer_array.push($(this).val());
 					});
 				
 					choices = "<span class = 'mc_wrapper question_wrapper preview_element' id = 'question_" + num_q + "'>" + question 
 					+ "<ol id = 'mc_answers'>" + choices.html() + "</ol><br /><br /></span>"; 
 					$("#preview").append(choices);
-					
-	
+
+					answer_array[num_q] = mc_answer_array;
 					feedback_array[num_q] = mc_feedback_array;
-					question_answers[num_q] = $("input[name=mc_correct]:checked").val();
+					correct_answers[num_q] = $("input[name=mc_correct]:checked").val();
 	
 					num_q++;
 					
@@ -892,7 +896,7 @@ function isSupportedFileType(extension){
 			return true;
 			
 		default:
-			false;
+			return false;
 	}
 }
 
@@ -904,7 +908,7 @@ function isAudio(extension){
 			return true;
 			
 		default:
-			false;
+			return false;
 	}
 }
 

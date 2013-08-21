@@ -4,8 +4,8 @@
 var display_num = 1;    //numbered order of question
                         //this may differ from actual creation number
 
-answers = JSON.parse(localStorage.answers);
-feedback = JSON.parse(localStorage.feedback);
+var correct_answers = JSON.parse(localStorage.correct_answers);
+var feedback = JSON.parse(localStorage.feedback);
 
 $(document).ready(function() {
 
@@ -13,10 +13,10 @@ $(document).ready(function() {
         var preview = JSON.parse(localStorage.builder_preview);
         var case_name = localStorage.case_name;
         try {
-        	saveData(answers, feedback);
+		saveData(correct_answers, feedback);
     	}
     	catch(e) {
-    		getData(answers, feedback);
+		getData(correct_answers, feedback);
     	}
 
         $('#center_content').empty();
