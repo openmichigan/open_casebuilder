@@ -486,7 +486,11 @@ $(document).ready(function() {
 			data = CKEDITOR.instances.editor.getData();
 
 			//Update Preview
-			wrapper.children('h2').html($("#text_header").val());
+			var updated_header = $("#text_header").val();
+			if (updated_header == 'Section Header' || updated_header == '') {
+				updated_header = '';
+			}
+			wrapper.children('h2').html(updated_header);
 			wrapper.find('.wysiwyg_text').html(data);
 			if(add_new_border){
 				wrapper.find('.wysiwyg_text').wrap("<div id = 'border_box' />");
@@ -501,7 +505,7 @@ $(document).ready(function() {
 			$(".add_button").show().css('display', 'inline-block');
 
 			//Reset
-			$("#text_header").val('Enter Header/Bold Text').css('color', '#BBB');
+			$("#text_header").val('Section Header').css('color', '#BBB');
 			$("#add_border").attr('checked', false);
 			CKEDITOR.instances.editor.setData('');
 
@@ -509,7 +513,7 @@ $(document).ready(function() {
 
 		//Reset Tab if User Changes During Update
 		$(".tab").click(function(){
-			$("#text_header").val('Enter Header/Bold Text').css('color', '#BBB');
+			$("#text_header").val('Section Header').css('color', '#BBB');
 			$("#add_border").attr('checked', false);
 			CKEDITOR.instances.editor.setData('');
 		});
