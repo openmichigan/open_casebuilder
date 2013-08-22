@@ -41,7 +41,8 @@ $(document).ready(function() {
 	
 		//PATIENT
 		$("#pat_remove").live('click', function() {
-			$('#pat_wrapper').remove();
+			var patient_wrapper = $(this).parent('span');
+			patient_wrapper.remove();
 		});
 	
 		//TEXT BOX

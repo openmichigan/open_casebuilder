@@ -382,6 +382,8 @@ $(document).ready(function() {
 	////////EDIT PATIENT PROFILE////////
 	$("#pat_edit").live("click", function(){
 
+		var patient_wrapper = $(this).parent('span');
+
 		//Replace Add Button with Update
 		$(".add_button").hide();
 		$(".update_button").attr('id', 'update_pat_button');
@@ -389,8 +391,8 @@ $(document).ready(function() {
 
 		//Change Tab
 		$(".tab_content").hide();
-			populatePatientFields();
-			$("#pat_content #tab_title").html('Edit Your Patient:');
+			populatePatientFields(patient_wrapper);
+			$("#pat_content #tab_title").html('Edit This Patient:');
 			$(".tab").css('color', 'white');
 			$("#patient").css('color', '#fdd70f');
 		
@@ -405,10 +407,10 @@ $(document).ready(function() {
 			}
 			update_count++;
 
-			$("#li_gender").html('Gender: ' + "<span id = 'gender_wrapper'>" + $("#gender").val() + "</span>");
-			$("#li_age").html('Age: ' + "<span id = 'age_wrapper'>" + $("#pat_age").val() + "</span>");
-			$("#li_country").html('Region or Country: ' + "<span id = 'country_wrapper'>" + $("#pat_country").val() + "</span>");
-			$("#li_pat_other").html('Other: ' + "<span id = 'country_wrapper'>" + $("#pat_other").val() + "</span>");
+			patient_wrapper.find("#li_gender").html('Gender: ' + "<span id = 'gender_wrapper'>" + $("#gender").val() + "</span>");
+			patient_wrapper.find("#li_age").html('Age: ' + "<span id = 'age_wrapper'>" + $("#pat_age").val() + "</span>");
+			patient_wrapper.find("#li_country").html('Region or Country: ' + "<span id = 'country_wrapper'>" + $("#pat_country").val() + "</span>");
+			patient_wrapper.find("#li_pat_other").html('Other: ' + "<span id = 'country_wrapper'>" + $("#pat_other").val() + "</span>");
 
 			//Replace Update with Add
 			$(".update_button").hide();
@@ -754,16 +756,16 @@ function populateMedia() {
 }
 
 //populate fields for patient profile
-function populatePatientFields(){
-	age = $("#age_wrapper").html();
-	gender = $("#gender_wrapper").html();
-	country = $("#country_wrapper").html();
-	pat_details = $("#pat_other_wrapper").html();
+function populatePatientFields(wrapper){
+	age = wrapper.find("#age_wrapper").html();
+	gender = wrapper.find("#gender_wrapper").html();
+	country = wrapper.find("#country_wrapper").html();
+	pat_details = wrapper.find("#pat_other_wrapper").html();
 
 	$("#gender").val(gender);
-	$("#pat_age").val(age);
-	$("#pat_country").val(country);
-	$("#pat_other").val(pat_details);
+	$("#pat_age").val(age).css('color', 'black');
+	$("#pat_country").val(country).css('color', 'black');
+	$("#pat_other").val(pat_details).css('color', 'black');
 }
 
 function populateText(wrapper){

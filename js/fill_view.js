@@ -84,8 +84,11 @@ function processLO(element) {
 }
 
 function processPat(element) {
+        var num = element.attr('id');
+        num = num.substring(num.indexOf('_') + 1);
+        var list_id = 'pat_list_' + num;
         $('#center_content').append("<h2>" + element.find('h2').text() + "</h2><div id = 'break'></div>");
-        var pat_list = element.find('#pat_list').clone();
+        var pat_list = element.find('#' + list_id).clone();
         $('#center_content').append(pat_list);
         $('#center_content').append('</br>');
 }

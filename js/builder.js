@@ -32,6 +32,7 @@ var feedback_array = [];
 var author_array = [];
 var is_video;
 var num_q = 1;
+var num_pat = 1;
 
 $(document).ready(function() {
 
@@ -57,14 +58,12 @@ $(document).ready(function() {
         //change add box content on nav click
         changeTab();
 
-        //Add Learning Objective
+        //Add/Remove Learning Objectives
         addLearningObj();
-        //Remove Learning Objective
         removeLearningObj();
 
-        //Add Answer
+        //Add/Remove Multiple Choice options
         addMcAnswer();
-        //Remove Answer
         removeMcAnswer();
 
         //View Preview
@@ -182,12 +181,14 @@ $(document).ready(function() {
 					alert('Missing patient information.');
 					return false;
 				}
-	
-				p_list = $("<span class = 'preview_element pat_wrapper' id = 'pat_wrapper'>"
+
+				var pat_list_id = 'pat_list_' + num_pat;
+
+				p_list = $("<span class = 'preview_element pat_wrapper' id = 'patient_" + num_pat + "'>"
 				+ "<span class = 'arrow_box'><span class = 'arrow_wrapper'><div class = 'up'></div></span><span class = 'arrow_wrapper'><div class = 'down'></div></span></span>"
 				+ "<h2>Patient Profile</h2>"
 				+ "<p id = 'pat_edit' class = 'edit'>Edit</p> <p id = 'pat_remove' class = 'remove'>Remove</p>"
-				+ "<ul id = 'pat_list'></ul></span>");
+				+ "<ul id = '" + pat_list_id + "'></ul></span>");
 	
 				p_list.appendTo($("#preview"));
 	
@@ -196,7 +197,7 @@ $(document).ready(function() {
 	
 						case 'gender':
 							var li = $("<li id = 'li_gender'>Gender: <span id = 'gender_wrapper'>" + $(this).val() + "</span></li>");
-							li.appendTo('#pat_list');
+							li.appendTo('#' + pat_list_id);
 							break;
 	
 					}
@@ -208,12 +209,12 @@ $(document).ready(function() {
 	
 						case 'pat_age':
 							var li = $("<li id = 'li_age'>Age: <span id = 'age_wrapper'>" + $(this).val() + "</span></li>");
-							li.appendTo('#pat_list');
+							li.appendTo('#' + pat_list_id);
 							break;
 	
 						case 'pat_country':
 							var li = $("<li id = 'li_country'>Region or Country: <span id = 'country_wrapper'>" + $(this).val() + "</span></li>");
-							li.appendTo('#pat_list');
+							li.appendTo('#' + pat_list_id);
 							break;
 	
 						case 'pat_other':
@@ -225,14 +226,15 @@ $(document).ready(function() {
 								other_details = $(this).val();
 							}
 							var li = $("<li id = 'li_pat_other'>Other: <span id = 'pat_other_wrapper'>" + other_details + "</span></li>");
-							li.appendTo('#pat_list');
+							li.appendTo('#' + pat_list_id);
 							break;
 	
 					}
 				});
 	
 				$("#pat_wrapper").append("</br>");
-	
+				num_pat++;
+
 				$("#pat_content").empty().hide().append(pat_default).fadeIn();
 				$("#age").val(0);
 				$("#gender").val(0);
