@@ -14,11 +14,24 @@ $(document).ready(function() {
 	});
 	// end multiple choice highlight
 
+	//select all that apply highlight
+	$('.sata_checkbox').live('click', function() {
+		var sata_parent = $(this).parents('.sata_group');
+		var inputs = sata_parent.find('input:text');
+		if ($(this).is(':checked')) {
+			inputs.css('background-color', '#FBFFB3');
+		} else {
+			inputs.css('background-color', '#FFF');
+		}
+	});
+	// end select all that apply highlight
+
 	$('.response_c').hide();
 	$('.response_i').hide();
 
 	//highlight and select multiple choice answer or true false; show/hide feedback
 	mcSelect();
+	sataSelect();
 	tfSelect();
 
 	$('input[type=submit]').click(function() {
@@ -67,6 +80,27 @@ function mcSelect() {
 	
 		fbselected.css('display', 'compact');
 		
+	});
+}
+
+function sataSelect() {
+	$('.sata_answer').live('click', function() {
+
+		$(this).css('color', '#7FA4D4');
+
+		var fbselected = $(this).children('.feedback');
+
+		//hide (incorrect) siblings' feedback options
+		$(this).siblings().each(function () {
+			var fbchild = $(this).children('.feedback');
+			var fbstring = fbchild.html().substring(0,8);
+			if (fbstring != 'Correct:') {
+				fbchild.css('display', 'none');
+				fbchild.parent().css('color', 'black');
+			}
+		});
+
+		fbselected.css('display', 'compact');
 	});
 }
 

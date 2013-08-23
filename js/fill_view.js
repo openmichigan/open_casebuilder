@@ -202,6 +202,35 @@ function processQ(element) {
 						count++
                 });
         }
+
+	//Select All That Apply
+	if(element.hasClass('sata_wrapper')) {
+		var q_num = element.attr('id').substring(9);
+		$('#center_content').append("<h2>Q" + display_num + ": " + element.find('h2').text()
+		+ "</h2></br><h4>(Click on ALL Correct Answers)</h4><div id = 'q_underline'></div>");
+
+		var submit = "";
+
+		display_num++;
+
+		var sata_list = $("<span class = 'sata_" + q_num + "'><ol id = 'spaced_ul'></ol></br>" + submit + "</span>");
+		$('#center_content').append(sata_list);
+
+		var count = 1;
+
+		var sata_fb_array = [];
+
+		element.find('.feedback').each(function(index) {
+			sata_fb_array.push($(this).text());
+		});
+
+		element.find('li').each(function(index) {
+			var li_element = $("<li id = '" + count + "' class = 'sata_answer' >" + $(this).text() + "</li>");
+						li_element.append("<br/><span class='feedback' style='display:none'>"+ sata_fb_array[index] + "</span");
+						sata_list.find('ol').append(li_element);
+						count++
+		});
+	}
 }
 
 function processMedia(element) {

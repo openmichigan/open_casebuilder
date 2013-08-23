@@ -4,6 +4,7 @@
 //Number of Inputs
 var input_num = 1;
 var mc_num = 1;
+var sata_num = 1;
 
 //Media Globals
 var is_video;
@@ -65,6 +66,10 @@ $(document).ready(function() {
         //Add/Remove Multiple Choice options
         addMcAnswer();
         removeMcAnswer();
+
+        //Add/Remove Select All That Apply options
+        addSataAnswer();
+        removeSataAnswer();
 
         //View Preview
         $('#view_preview').click(function() {
@@ -387,7 +392,7 @@ $(document).ready(function() {
 						return false;
 					}
 	
-					question = "<span class = 'arrow_box'><span class = 'arrow_wrapper'><div class = 'up'></div></span>"
+					var question = "<span class = 'arrow_box'><span class = 'arrow_wrapper'><div class = 'up'></div></span>"
 					+ "<span class = 'arrow_wrapper'><div class = 'down'></div></span></span>" 
 					+ "<h2>" + $("#q_input").val() + "</h2>" + "<p id = 'mc_edit' class = 'edit'>Edit</p>" +
 					"<p id = 'q_remove' class = 'remove'>Remove</p></br>";
@@ -431,10 +436,70 @@ $(document).ready(function() {
 					
 				} // End add Multiple choice question
 				
+				//Select All That Apply
+				if($("#question_type").val() == 'sata'){
+
+					var sata_correct = []; //$("input[name=sata_correct]:checked").val(); // XXX Need to check each choice
+					var correct_picked = false;
+					$(".sata_checkbox").each(function() {
+						if($(this).is(':checked')) {
+							$('.debug_output').append("<br />Checkbox with id is checked: " + $(this).attr('id')); // XXX
+							var id_num = $(this).attr('id').substring(13);
+							sata_correct[id_num] = true;
+							correct_picked = true;
+						}
+					});
+					if(!correct_picked) {
+						alert('Please select at least one correct answer');
+						return false;
+					}
+
+					var question = "<span class = 'arrow_box'><span class = 'arrow_wrapper'><div class = 'up'></div></span>"
+					+ "<span class = 'arrow_wrapper'><div class = 'down'></div></span></span>"
+					+ "<h2>" + $("#q_input").val() + "</h2>" + "<p id = 'sata_edit' class = 'edit'>Edit</p>" +
+					"<p id = 'q_remove' class = 'remove'>Remove</p></br>";
+
+					input_id = 'sata_' + num_q.toString();
+					var choices = $("<ul id = 'sata_answers'></ul>");
+
+					sata_feedback_array = [];
+					$(".sata_feedback").each(function() {
+						sata_feedback_array.push($(this).val());
+					});
+
+					var sata_answer_array = [];
+					$(".q_tab_sata_answer").each(function(index){
+						choices.append("<li>" + $(this).val() + "</li>");
+						if (sata_correct[(index +1)]) {
+							choices.append("<ul>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='feedback'>" + "Correct: " +
+								sata_feedback_array[index] + "</span></ul>");
+						}
+						else {
+							choices.append("<ul>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='feedback'>" + sata_feedback_array[index] +
+							"</span></ul>");
+						}
+						sata_answer_array.push($(this).val());
+					});
+
+					choices = "<span class = 'sata_wrapper question_wrapper preview_element' id = 'question_" + num_q + "'>" + question
+					+ "<ol id = 'sata_answers'>" + choices.html() + "</ol><br /><br /></span>";
+					$("#preview").append(choices);
+
+					answer_array[num_q] = sata_answer_array;
+					feedback_array[num_q] = sata_feedback_array;
+					correct_answers[num_q] = sata_correct; // $("input[name=sata_correct]:checked").val(); // XXX Needs to be an array!
+
+					num_q++;
+
+					sata_num = 1;
+
+				} // End add Select All That Apply question
+
 				//Reset Tab, back to default question type
 				$("#q_content").empty().hide().append(q_default).fadeIn();
 				$("#fill_input").hide();
-				$("#tf_input").hide();	
+				$("#tf_input").hide();
+				$("#sata_input").hide();
 				$("#mc_input").show();	
 
 					
@@ -692,7 +757,7 @@ $(document).ready(function() {
 	
 			//Multiple Choice Answers
 			if($(this).attr('class') == 'q_tab_answer' && $(this).val() == ''){
-				mc_answer_number = $(this).attr('id').substring(3);
+				var mc_answer_number = $(this).attr('id').substring(3);
 				$(this).css('color', '#BBB').val('Enter Option ' + mc_answer_number);
 			}
 	
@@ -701,6 +766,17 @@ $(document).ready(function() {
 				$(this).css('color', '#BBB').val('Type Feedback');
 			}
 	
+			//Select All That Apply Answers
+			if($(this).attr('class') == 'q_tab_sata_answer' && $(this).val() == ''){
+				var sata_answer_number = $(this).attr('id').substring(5);
+				$(this).css('color', '#BBB').val('Enter Option ' + sata_answer_number);
+			}
+
+			//Select All That Apply Feedback
+			if($(this).attr('id') == 'sata_feedback' && $(this).val() == ''){
+				$(this).css('color', '#BBB').val('Type Feedback');
+			}
+
 			//Media Header
 			if($(this).attr('id') == 'media_header' && $(this).val() == ''){
 				$(this).css('color', '#BBB').val('Section Header');
@@ -733,7 +809,7 @@ function addLearningObj(){
                 id = "lo_" + input_num.toString();
                 input_num++;
                 
-                input = $("<span class = 'input_and_circle'>" +
+                var input = $("<span class = 'input_and_circle'>" +
                 "<input id = '" + id + "' class = 'lo_tab_input' value = 'Enter Learning Objective " + input_num + 
                 "'/></span>");
 
@@ -767,7 +843,7 @@ function addMcAnswer(){
                 id = "mc_" + mc_num.toString();
                 
 
-                input = 
+                var input =
 
                 "<div class = 'mc_group'><span class = 'input_and_circle'>" +
                 "<input type = 'text' id = '" + id + "' class = 'q_tab_answer' value = 'Enter Option " + mc_num + "'/>" +
@@ -799,6 +875,46 @@ function removeMcAnswer(){
                 });
                 mc_num--;
 
+        });
+}
+
+function addSataAnswer(){
+
+        $("#add_sata_answer").live("click", function(){
+
+                sata_num++;
+                id = "sata_" + sata_num.toString();
+
+                var input =
+
+                "<div class = 'sata_group'><span class = 'input_and_circle'>" +
+                "<input type = 'text' id = '" + id + "' class = 'q_tab_sata_answer' value = 'Enter Option " + sata_num + "'/>" +
+                "<span class = 'sata_checkboxes'> Correct" +
+                "<input type = 'checkbox' name = 'sata_correct' class = 'sata_checkbox' id = 'sata_correct_" + sata_num + "' value = '" + sata_num + "'/></span>" +
+                "</span>" +
+
+                "<span class = 'input_and_circle'>" +
+                "<input type = 'text' id = 'sata_feedback' class = 'content_input sata_feedback' value = 'Type Feedback" + "'/>" +
+                "</span></br>" +
+                "</br></br></div>";
+
+                $("#sata_controls").before($(input).fadeIn());
+
+        });
+
+}
+
+function removeSataAnswer(){
+
+        $("#remove_sata_answer").live("click", function(){
+                if(sata_num == 1){
+                        return;
+                }
+
+                $(".sata_group:last").fadeOut('fast', function(){
+                        $(this).remove();
+                });
+                sata_num--;
         });
 }
 
@@ -928,6 +1044,7 @@ function changeTab(){
 					$(".tab_content").hide();
 					$("#fill_input").hide();
 					$("#tf_input").hide();
+					$("#sata_input").hide();
 					$("#lo_content").show();
 				}, 200);
 
@@ -971,25 +1088,38 @@ function changeTab(){
 						if($(this).val() == "fill"){
 							$("#tf_input").fadeOut(100, function(){
 								$("#mc_input").fadeOut(100, function(){
-									$("#fill_input").fadeIn(600);
+									$("#sata_input").fadeOut(100, function(){
+										$("#fill_input").fadeIn(600);
+									});
 								});
 							});
 						}
 						if($(this).val() == "tf"){
 							$("#fill_input").fadeOut(100, function(){
 								$("#mc_input").fadeOut(100, function(){
-									$("#tf_input").fadeIn(600);
+									$("#sata_input").fadeOut(100, function(){
+										$("#tf_input").fadeIn(600);
+									});
 								});
 							});
 						}
 						if($(this).val() == "mc"){
-
 							$("#fill_input").fadeOut(100, function(){
 								$("#tf_input").fadeOut(100, function(){
-									$("#mc_input").fadeIn(600);
+									$("#sata_input").fadeOut(100, function(){
+										$("#mc_input").fadeIn(600);
+									});
 								});
 							});
-
+						}
+						if($(this).val() == "sata"){
+							$("#fill_input").fadeOut(100, function(){
+								$("#tf_input").fadeOut(100, function(){
+									$("#mc_input").fadeOut(100, function(){
+										$("#sata_input").fadeIn(600);
+									});
+								});
+							});
 						}
 					});
 				});

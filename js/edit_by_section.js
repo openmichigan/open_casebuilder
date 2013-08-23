@@ -191,6 +191,7 @@ $(document).ready(function() {
 			$("#question_type").val('mc');
 			$("#fill_input").hide();
 			$("#tf_input").hide();
+			$("#sata_input").hide();
 			$("#mc_input").show();
 			$("#q_content").show();
 		}, 200);
@@ -252,6 +253,7 @@ $(document).ready(function() {
 			$("#q_content").hide().html(q_default);
 			$("#tf_input").hide();
 			$("#fill_input").hide();
+			$("#sata_input").hide();
 			$("#q_content").show()
 
 
@@ -260,6 +262,115 @@ $(document).ready(function() {
 	});	//end edit click for multiple choice Qs
 	
 	
+	///////////EDIT SELECT ALL THAT APPLY QUESTION/////////
+	$("#sata_edit").live('click', function(){
+
+		question_wrapper = $(this).parent('span');
+		question_num = question_wrapper.attr('id');
+		question_num = question_num.substring(question_num.indexOf('_') + 1);
+		//Replace Add with Update
+		$(".add_button").hide();
+		$(".update_button").attr('id', 'update_sata_button');
+		$(".update_button").show().css('display', 'inline-block');
+
+		//Change Tab
+		$(".tab_content").hide();
+		$("#q_content #tab_title").html('Edit Question:');
+		$(".tab").css('color', 'white');
+		$("#question").css('color', '#fdd70f');
+
+		//Update Prep
+		$('#q_input').css('color', 'black');
+		populateSATA(question_wrapper, question_num);
+		//Bring Tab Back to View
+		window.setTimeout(function(){
+			$("#question_type").val('sata');
+			$("#fill_input").hide();
+			$("#tf_input").hide();
+			$("#mc_input").hide();
+			$("#sata_input").show();
+			$("#q_content").show();
+		}, 200);
+
+		update_count = 0;
+
+		//Update Preview
+		$("#update_sata_button").live('click', function() {
+
+			//prevent multiple firing
+			if(update_count){
+				return false;
+			}
+			update_count++;
+
+			// Verify at least one checkbox is still checked
+			var correct_picked = false;
+			var sata_correct = [];
+			$(".sata_checkbox").each(function() {
+				if($(this).is(':checked')) {
+					var id_num = $(this).attr('id').substring(13);
+					sata_correct[id_num] = true;
+					correct_picked = true;
+				}
+			});
+			if(!correct_picked) {
+				alert('Please select at least one correct answer');
+				update_count = 0;
+				return false;
+			}
+
+			//Update the question text
+			question_wrapper.find('h2').html($("#q_input").val());
+			question_wrapper.find("#sata_answers").empty();
+
+			//Update Answer and Feedback
+
+			//Update stored values
+			feedback_array[question_num] = [];
+			var sata_answer_array = [];
+			var sata_feedback_array = [];
+			$(".sata_feedback").each(function() {
+				feedback_array[question_num].push($(this).val());
+				sata_feedback_array.push($(this).val());
+			});
+
+			correct_answers[question_num] = sata_correct;
+
+			//Update display
+
+			$(".q_tab_sata_answer").each(function(index) {
+				sata_answer_array.push($(this).val()) ;
+				question_wrapper.find("#sata_answers").append("<li>" + $(this).val() + "</li>");
+
+				if (sata_correct[(index +1)]) {
+					question_wrapper.find("#sata_answers").append("<ul>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='feedback'>" + "Correct: " +
+						sata_feedback_array[index] + "</span></ul>");
+				}
+				else {
+					question_wrapper.find("#sata_answers").append("<ul>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='feedback'>" +
+						sata_feedback_array[index] + "</span></ul>");
+				}
+			});
+
+			answer_array[question_num] = sata_answer_array;
+			feedback_array[question_num] = sata_feedback_array;
+
+			//Replace Update Button with Add
+			$(".update_button").hide();
+			$(".add_button").show().css('display', 'inline-block');
+
+			//Reset Tab If Changed During Update
+			$("#q_content").hide().html(q_default);
+			$("#tf_input").hide();
+			$("#fill_input").hide();
+			$("sata_input").hide();
+			$("mc_input").show();
+			$("#q_content").show()
+		});
+
+	});	//end edit click for Select All That Apply Qs
+
+
 	
 	//////////EDIT MEDIA////////////
 	$("#media_edit").live('click', function(){
@@ -704,6 +815,52 @@ function populateMC(wrapper, q_num){
 	$(answer_id).attr('checked', 'checked');
 	$(answer_id).parents('.mc_group').find('input:text').css('background-color', '#FBFFB3');
 
+}
+
+function populateSATA(wrapper, q_num){
+	$("#q_input").val(wrapper.find('h2').html());
+	$(".sata_group").remove();
+
+	sata_num = 1;
+	var index = sata_num - 1;
+
+	wrapper.find("#sata_answers li").each(function() {
+
+		id = "sata_" + sata_num.toString();
+
+		input =
+
+		$("<div class = 'sata_group'><span class = 'input_and_circle'>" +
+		"<input id = '" + id + "' class = 'q_tab_sata_answer' value = '" + $(this).html() + "'/>" +
+		"</span>" +
+		"<span class = 'sata_checkboxes'> Correct" +
+		"<input type = 'checkbox' name = 'sata_correct' class = 'sata_checkbox' id = 'sata_correct_" + sata_num + "' value = '" + sata_num + "'/></span>" +
+
+		//use index since this array is populated with .push(), not question #
+		"<span class = 'input_and_circle'>" +
+		"<input id = 'sata_feedback' class = 'content_input sata_feedback' value = '" + feedback_array[q_num][index] + "'/>" +
+		"</span></br>" +
+		"</br></br></div>");
+
+		input.find('.q_tab_sata_answer').css('color', 'black');
+		input.find('.sata_feedback').css('color', 'black');
+
+		$("#sata_controls").before($(input).show());
+		sata_num++;
+		index++;
+
+	});
+
+	sata_num--;
+
+	//Check correct checkboxes
+	for (var i = 1; i <= correct_answers[q_num].length; i++) {
+		if (correct_answers[q_num][i]) {
+			var answer_id = "#sata_correct_" + i;
+			$(answer_id).attr('checked', 'checked');
+			$(answer_id).parents('.sata_group').find('input:text').css('background-color', '#FBFFB3');
+		}
+	}
 }
 
 function populateMedia() {

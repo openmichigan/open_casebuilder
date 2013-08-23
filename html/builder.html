@@ -183,6 +183,7 @@ Create and add case elements using the tabs in the right pane and the Add button
 				</br></br>
 				<select id = "question_type">
 					<option value = "mc">Multiple Choice</option>
+					<option value = "sata">Select All That Apply</option>
 					<option value = "tf">True/False</option>
 					<option value = "fill">Fill in the Blank</option>
 				</select>
@@ -219,6 +220,37 @@ Create and add case elements using the tabs in the right pane and the Add button
 						</br>
 						<div id = 'add_answer' class = 'circle'>+</div>
 						<div id = 'remove_answer' class = 'circle'>-</div>
+					</span>
+
+					</br>
+				</span>
+
+				<!-- SELECT ALL THAT APPLY -->
+				<span id = "sata_input" hidden=true>
+					<p id = 'sata_sub_title'>Options:</p>
+
+					<div class = "sata_group">
+						<span id = "input_and_circle">
+							<input type = "text" class = "q_tab_sata_answer" id = 'sata_1' value = 'Enter Option 1'/>
+
+							<span class = "sata_checkboxes">Correct
+								<input  value = "1" class = "sata_checkbox" type = 'checkbox' name = 'sata_correct' id = 'sata_correct_1'/>
+							</span>
+
+						</span>
+
+						<span id = "input_and_circle">
+							<input type = "text" class = "content_input sata_feedback" id = 'sata_feedback' value = 'Type Feedback'/>
+
+						</span></br>
+
+						</br></br>
+					</div>
+
+					<span id = "sata_controls">
+						</br>
+						<div id = 'add_sata_answer' class = 'circle'>+</div>
+						<div id = 'remove_sata_answer' class = 'circle'>-</div>
 					</span>
 
 					</br>

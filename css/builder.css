@@ -409,11 +409,11 @@ td {
 	vertical-align: top;
 }
 
-.correct_radio{
+.correct_radio,.correct_checkbox{
 	position: relative !important; 
 }
 
-.mc_radio {
+.mc_radio,.sata_checkbox {
 	margin-left: 10px;
 }
 
